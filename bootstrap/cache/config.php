@@ -200,7 +200,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\framework/cache/data',
+        'path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -373,13 +373,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\app',
+        'root' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\app',
         'throw' => false,
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\app/public',
+        'root' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
         'throw' => false,
@@ -399,7 +399,7 @@
     ),
     'links' => 
     array (
-      'D:\\xampp\\htdocs\\chat-to-met\\public\\storage' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\app/public',
+      'D:\\xampp\\htdocs\\chat-to-met-web\\public\\storage' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -475,13 +475,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\logs/laravel.log',
+        'path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\logs/laravel.log',
+        'path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -533,7 +533,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\logs/laravel.log',
+        'path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -599,7 +599,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'D:\\xampp\\htdocs\\chat-to-met\\resources\\views/vendor/mail',
+        0 => 'D:\\xampp\\htdocs\\chat-to-met-web\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -706,7 +706,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\framework/sessions',
+    'files' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -726,9 +726,9 @@
   array (
     'paths' => 
     array (
-      0 => 'D:\\xampp\\htdocs\\chat-to-met\\resources\\views',
+      0 => 'D:\\xampp\\htdocs\\chat-to-met-web\\resources\\views',
     ),
-    'compiled' => 'D:\\xampp\\htdocs\\chat-to-met\\storage\\framework\\views',
+    'compiled' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\framework\\views',
   ),
   'passport' => 
   array (
@@ -815,7 +815,7 @@
     array (
     ),
     'enable_runnable_solutions' => NULL,
-    'remote_sites_path' => 'D:\\xampp\\htdocs\\chat-to-met',
+    'remote_sites_path' => 'D:\\xampp\\htdocs\\chat-to-met-web',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
