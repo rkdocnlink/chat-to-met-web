@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('otp')->after('role')->nullable();
+            $table->text('account_token')->after('role')->nullable();
+            $table->integer('otp')->after('account_token')->nullable();
+            $table->boolean('status')->after('otp')->default(0);
         });
     }
 

@@ -27,7 +27,7 @@ class UserRegisterAPIRequest extends FormRequest
     {
         return [
             'name' => 'required|min:6', 
-            'email' => 'required|email|unique:users', 
+            'email' => 'required|email', 
             'password' => 'required|min:6|max:150|same:confirm_password',
             'confirm_password' => 'required', 
         ];
@@ -46,7 +46,6 @@ class UserRegisterAPIRequest extends FormRequest
     public function messages()
     {
         return [
-            'password.unique:users' => 'Email already exists!',
             'email.required' => 'Email is required!',
             'password.required' => 'Password is required!'
         ];

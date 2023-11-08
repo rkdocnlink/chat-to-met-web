@@ -25,6 +25,7 @@ class UserVerifyOTPAPIRequest extends FormRequest
     public function rules()
     {
         return [
+            'temp_access_token' => 'required',
             'otp' => 'required|min:6|max:6'
         ];
     }
@@ -42,9 +43,9 @@ class UserVerifyOTPAPIRequest extends FormRequest
     public function messages()
     {
         return [
-            'otp.required' => 'OTP is required!',
-            'password.min:6' => 'OTP must be 6 digit',
-            'password.max:6' => 'OTP must be 6 digit',
+            'temp_access_token.required' => 'Temporary account token is required!',
+            'otp.min:6' => 'OTP must be 6 digit',
+            'otp.max:6' => 'OTP must be 6 digit',
         ];
     }
 }
