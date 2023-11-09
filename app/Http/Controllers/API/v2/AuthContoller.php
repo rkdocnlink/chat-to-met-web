@@ -8,80 +8,105 @@ use App\Models\User;
 use App\Http\Requests\UserloginAPIRequest;
 use App\Http\Requests\UserRegisterAPIRequest;
 use App\Http\Requests\UserVerifyOTPAPIRequest;
+use App\Http\Resources\VerifyOTPResource;
 use App\Http\Resources\UserResource;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Exception;
 class AuthContoller extends Controller
 {
     public function loginUser(UserloginAPIRequest $request){
 
       try{
-
         if(User::where('email',$request->email)->exists()){
-
           $user=User::where('email',$request->email)->first();
- 
            if (Hash::check($request->password, $user->password)) {
-            
+             if(User::where('email',$request->email)->where('status',1)->exists()){
               $userToken= $user->createToken(env('API_ACCESS_TOKEN'))->accessToken;
                 $user->access_token = $userToken;
                   return response()->json(['status'=>true,
                                         'messaage'=>'Login Successfull',
                                         'auth_token'=>$userToken,
                                         'data'=>new UserResource($user)], 200);
-               
+                  }elseif(User::where('email',$request->email)->where('status',0)->exists()){
+                    return response()->json(['status'=>false,'messaage'=>'Sorry account is not verified'], 200);
+                }
            }else{
- 
                return response()->json(['status'=>false,'messaage'=>'Sorry invalid password'], 200);
            }
        }else{
-           return response()->json(['status'=>false,'error'=>'Sorry this email does not exists'], 200);
+           return response()->json(['status'=>false,'messaage'=>'Sorry this email does not exists'], 200);
        }
 
       }catch(Exception $e){ 
-
-        return response()->json(['status'=>false,'error'=>$e->getMessage()],500);
+        return response()->json(['status'=>false,'messaage'=>$e->getMessage()],500);
       }
        
     }
     public function registerUser(UserRegisterAPIRequest $request){
+
       try{
 
-        $otp=rand(100000,999999);
-        $createUser=new User();
-        $createUser->name=$request->name;
-        $createUser->email=$request->email;
-        $createUser->password=$request->password;
-        $createUser->role=1;
-        $createUser->otp=$otp;
-        $createUser->save();
-        return response()->json(['status'=>false,'error'=>'An OTP sent to your mail ID '. $otp],200);
+        if(!User::where('email',$request->email)->exists()){
+            $otp=rand(100000,999999);
+            $accountToken = Str::random(300);
+            $createUser=new User();
+            $createUser->name=$request->name;
+            $createUser->email=$request->email;
+            $createUser->password=Hash::make($request->password);
+            $createUser->role=1;
+            $createUser->otp=$otp;
+            $createUser->account_token=$accountToken;
+            $createUser->save();
+            return response()->json(['status'=>true,'messaage'=>'An OTP sent to your mail ID '. $otp,'temp_access_token'=>$accountToken],200);
 
+        }
+        else if(User::where('email',$request->email)->where('status',0)->exists()){
+            $otp=rand(100000,999999);
+            $accountToken = Str::random(300);
+            $createUser=User::where('email',$request->email)->where('status',0)->first();
+            $createUser->name=$request->name;
+            $createUser->email=$request->email;
+            $createUser->password=Hash::make($request->password);
+            $createUser->role=1;
+            $createUser->otp=$otp;
+            $createUser->account_token=$accountToken;
+            $createUser->save();
+            return response()->json(['status'=>true,'messaage'=>'An OTP sent to your mail ID '. $otp,'temp_access_token'=>$accountToken],200);
+
+        }else{
+          return response()->json(['status'=>false,'messaage'=> 'Sorry this email is already exists']);
+        }  
       }catch(Exception $e){ 
-
-        return response()->json(['status'=>false,'error'=>$e->getMessage()],500);
+        return response()->json(['status'=>false,'messaage'=>$e->getMessage()],500);
       }
        
   }
 
   public function verifyOTP(UserVerifyOTPAPIRequest $request){
+
     try{
-
-      $otp=rand(100000,999999);
-      $createUser=new User();
-      $createUser->name=$request->name;
-      $createUser->email=$request->email;
-      $createUser->password=$request->password;
-      $createUser->role=1;
-      $createUser->otp=$otp;
-      $createUser->save();
-      return response()->json(['status'=>false,'error'=>'An OTP sent to your mail ID '. $otp],200);
-
-    }catch(Exception $e){ 
-
-      return response()->json(['status'=>false,'error'=>$e->getMessage()],500);
-    }
+      if(User::where('account_token',$request->temp_access_token)->exists()){
+        if(User::where('otp',$request->otp)->exists()){
+             $user=User::where('account_token',$request->temp_access_token)->first();
+             $user->account_token=NULL;
+             $user->otp=NULL;
+             $user->status=1;
+             $user->save();
+             $userToken= $user->createToken(env('API_ACCESS_TOKEN'))->accessToken;
+             $user->access_token = $userToken;
+              return response()->json(['status'=>true,'messaage'=>'OTP verified successfully',
+                                     'data'=>new VerifyOTPResource($user)],200);
+        }else{
+          return response()->json(['status'=>false,'messaage'=>'Sorry otp is invalid'],200);
+        }
+      }else{
+        return response()->json(['status'=>false,'messaage'=>'Sorry temporary account token is invalid'],200);
+      }
      
+    }catch(Exception $e){ 
+      return response()->json(['status'=>false,'messaage'=>$e->getMessage()],500);
+    }
+
 }
 
       public function userInfo(){

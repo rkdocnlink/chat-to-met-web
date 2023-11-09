@@ -1,11 +1,8 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ClassesController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,27 +14,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('admin.dashboard');
-})->name('adminDashboard');
+    return redirect('login');
+});
 
-Route::get('login', function () {
-    return view('admin.login');
-})->name('adminLogin');
+/******************Login************************/
+Route::get('login', [UserAuthController::class, 'viewLogin'])->name('login');
+Route::post('login', [UserAuthController::class, 'userLogin'])->name('user_login');
 
-Route::get('register', function () {
-    return view('admin.register');
-})->name('userRegister');
 
- 
-Route::resource('category', CategoryController::class);
-Route::resource('classes', ClassesController::class);
-Route::resource('subject', SubjectController::class);
-Route::resource('questions', QuestionsController::class);
+/******************Register************************/
+Route::get('register', [UserAuthController::class, 'viewRegister'])->name('register');
+Route::post('register', [UserAuthController::class, 'userRegister'])->name('user_register');
+Route::get('otp-verify', [UserAuthController::class, 'otpVerify'])->name('otp-verify');
+Route::post('otp-verify', [UserAuthController::class, 'userVerifyOTP'])->name('otp-verify-post');
 
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('get-classes',[QuestionsController::class,'getCategory'])->name('get-classes'); 
-Route::get('get-subjects',[QuestionsController::class,'getSubject'])->name('get-subjects'); 
+Route::get('dashboard', [UserAuthController::class, 'viewDashboard'])->name('dashboard');
