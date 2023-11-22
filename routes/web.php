@@ -33,4 +33,8 @@ Route::post('otp-verify', [UserAuthController::class, 'userVerifyOTP'])->name('o
 //----------------------------------Logout--------------------------/
 Route::get('logout', [UserAuthController::class, 'userLogOut'])->name('logout');
 
+//----------------------------------Profile--------------------------/
+Route::get('profile', [UserAuthController::class, 'userProfile'])->name('profile');
+Route::post('update-profile', [UserAuthController::class, 'userProfileUpdate'])->name('update-profile');
+
 Route::get('dashboard', [UserAuthController::class, 'viewDashboard'])->name('dashboard');

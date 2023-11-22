@@ -27,7 +27,8 @@ class UserAuthController extends Controller
     }
 
     public function viewDashboard(){
-        return view('admin.dashboard');
+        $list_contacts=User::where('status',1)->get();
+        return view('dashboard',compact('list_contacts'));
     }
 
 
@@ -102,10 +103,38 @@ class UserAuthController extends Controller
 
     public function otpVerify(Request $request){
 
-        return view('admin.verify-otp');
+        return view('verify-otp');
 
     }
+    public function userProfile(){
 
+        return view('profile-update'); 
+    }
+
+    public function userProfileUpdate(Request $request){
+
+       $user=User::where('id', Auth::user()->id)->first();
+       $user->name=$request->full_name;
+       $user->mobile=$request->mobile_number;
+       $user->location=$request->location;
+       $user->bio=$request->bio;
+       if($request->hasFile('profile_pic')){
+        $user->profile_pic = $this->addImage($request->profile_pic,'uploads/user/profile_pic');
+        }
+       $user->facebook=$request->facebook;
+       $user->twitter=$request->twitter;
+       $user->instagram=$request->instagram;
+       $user->linkedin=$request->linkedin;
+       $user->save();
+       return redirect()->back()->with('success','Profile updated successfully...');
+    }
+
+
+    public function addImage($requestName,$path){
+        $imageName = time().'.'.$requestName->extension();  
+        $requestName->move(public_path($path), $imageName);
+        return $imageName;
+       }
     // public function adminLogOut(){
 
     //     Session::flush();

@@ -44,12 +44,22 @@
                             @csrf
                             <div class="form-group">
                                 <label>Your Email</label>
-                                <input class="form-control form-control-lg group_formcontrol" name="email" type="email">
+                                <input class="form-control form-control-lg @error('email') is-invalid @enderror " name="email" type="email">
+                                @error('email')
+                                <span class="text text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input class="form-control form-control-lg group_formcontrol" name="password"
+                                <input class="form-control @error('password') is-invalid @enderror form-control-lg " name="password"
                                     type="password">
+                                    @error('password')
+                                <span class="text text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label class="custom-check d-flex">

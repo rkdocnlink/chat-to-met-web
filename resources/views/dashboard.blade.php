@@ -32,66 +32,21 @@
             <div class="top-online-contacts">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
+                        @if(isset($list_contacts) && !empty($list_contacts) && $list_contacts->count()>0)
+                        @foreach($list_contacts as $list_contact)
                         <div class="swiper-slide">
                             <div class="top-contacts-box">
                                 <div class="profile-img online">
                                     <img src="assets/img/avatar/avatar-8.jpg" alt="">
                                 </div>
                                 <div class="profile-name">
-                                    <span>helen</span>
+                                    <span>{{$list_contact->name}}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="top-contacts-box">
-                                <div class="profile-img online">
-                                    <img src="assets/img/avatar/avatar-7.jpg" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>Prince</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="top-contacts-box">
-                                <div class="profile-img online">
-                                    <img src="assets/img/avatar/avatar-13.jpg" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>Nathan</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="top-contacts-box">
-                                <div class="profile-img online">
-                                    <img src="assets/img/avatar/avatar-3.jpg" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>Maria</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="top-contacts-box">
-                                <div class="profile-img online">
-                                    <img src="assets/img/avatar/avatar-4.jpg" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>Prince</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="top-contacts-box">
-                                <div class="profile-img online">
-                                    <img src="assets/img/avatar/avatar-2.jpg" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>Maria</span>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+                        @endif
+                        
                     </div>
                 </div>
             </div>

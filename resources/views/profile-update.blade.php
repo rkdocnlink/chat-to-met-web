@@ -18,7 +18,7 @@
 								<h4>PROFILE</h4>
 							</div>
 							<div class="btn-section">
-								<button class="btn logout-btn">Sign out</button>
+								<a href="{{route('logout')}}" class="btn logout-btn">Sign out</a>
 							</div>
 						</div>
 						<!-- /Left Chat Title -->
@@ -37,7 +37,7 @@
 						<div class="profile-card">
 							<div class="profile-cover text-center mb-3">
 								<label class="profile-cover-avatar" for="avatar_upload">
-									<img class="avatar-img" src="assets/img/avatar/avatar-10.jpg" alt="Profile Image">
+									<img class="avatar-img" src="{{URL::asset('uploads/user/profile_pic/')}}/{{Auth::user()->profile_pic}}" alt="Profile Image">
 									<input type="file" id="avatar_upload">
 									<span class="avatar-edit">
 										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 avatar-uploader-icon shadow-soft">
@@ -45,38 +45,35 @@
 										</svg>
 									</span>
 								</label>
-								<h5 class="mt-3 profile-name mb-1">Michelle Green</h5>
-								<p class="profile-email mb-1"><a href="https://dreamschat.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2cfcbc1cac7cecec78cc5d0c7c7cce2c5cfc3cbce8cc1cdcf">[email&#160;protected]</a></p>
+								<h5 class="mt-3 profile-name mb-1">{{Auth::user()->name}}</h5>
+								<p class="profile-email mb-1"><a href="https://dreamschat.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" >{{Auth::user()->email}}</a></p>
 								<h5 class="profile-country mb-0">USA</h5>
 							</div>
 							<div class="profile-info">
 								<div class="text-center mb-4">
 									<p class="info-title mb-0">Phone</p>
-									<span class="info-text">555-555-21541</span>
+									<span class="info-text">{{Auth::user()->mobile}}</span>
 								</div>
-								<div class="text-center mb-4">
+								<!-- <div class="text-center mb-4">
 									<p class="info-title mb-0">Nick Name</p>
 									<span class="info-text">Alberywo</span>
-								</div>
-								<div class="text-center mb-4">
+								</div> -->
+								<!-- <div class="text-center mb-4">
 									<p class="info-title mb-0">Email</p>
 									<span class="info-text"><a href="https://dreamschat.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="17767b7572656e607857707a767e7b3974787a">[email&#160;protected]</a></span>
-								</div>
+								</div> -->
 								<ul class="social-nav p-0 mb-0 text-center">
 									<li>
-										<a href="#"><i class="fab fa-facebook-f"></i></a>
+										<a href="{{Auth::user()->facebook}}"><i class="fab fa-facebook-f"></i></a>
 									</li>
 									<li>
-										<a href="#"><i class="fab fa-instagram"></i></a>
+										<a href="{{Auth::user()->instagram}}"><i class="fab fa-instagram"></i></a>
 									</li>
 									<li>
-										<a href="#"><i class="fab fa-linkedin-in"></i></a>
+										<a href="{{Auth::user()->linkedin}}"><i class="fab fa-linkedin-in"></i></a>
 									</li>
 									<li>
-										<a href="#"><i class="fab fa-twitter"></i></a>
-									</li>
-									<li>
-										<a href="#"><i class="fab fa-youtube"></i></a>
+										<a href="{{Auth::user()->twitter}}"><i class="fab fa-twitter"></i></a>
 									</li>
 								</ul>
 							</div>
@@ -124,12 +121,12 @@
 							</div>
 							<div class="settings-footer">
 								<ul class="p-0 mb-0">
-									<li>
+									<!-- <li>
 										<a href="#"><i class="fas fa-chevron-right"></i>  Need Help? Let's chat</a>
 									</li>
 									<li>
 										<a href="#"><i class="fas fa-chevron-right"></i>  English (united States)</a>
-									</li>
+									</li> -->
 								</ul>
 								<div class="profile-update text-center py-4">
 									<button type="button" class="btn btn-update mb-0">
@@ -157,7 +154,7 @@
 						</div>
 						<div>
 							<h5>SETTINGS</h5>
-							<p>Last Update your profile: 29 Aug 2020</p>
+							<p>Last Update your profile:{{date('m  D Y ',strtotime(Auth::user()->updated_at))}}</p>
 						</div>
 					</div>
 					
@@ -180,38 +177,46 @@
 									<p>Update your account details</p>
 								</div>
 								<div class="settings-control p-3">
+								<form enctype="multipart/form-data" action="{{route('update-profile')}}" method="POST">
+										
 									<div class="form-col form-body">
-										<form action="https://dreamschat.dreamstechnologies.com/template-html/template2/index.html">
+											@csrf
 											<div class="row">
 												<div class="col-md-6 col-xl-4">
 													<div class="form-group">
-														<label>First Name</label>
-														<input class="form-control form-control-lg group_formcontrol" name="first-name" type="text">
+														<label>Full Name</label>
+														<input class="form-control form-control-lg " value="{{Auth::user()->name}}" name="full_name" type="text">
 													</div>
 												</div>
-												<div class="col-md-6 col-xl-4">
+												<!-- <div class="col-md-6 col-xl-4">
 													<div class="form-group">
 														<label>Last Name</label>
 														<input class="form-control form-control-lg group_formcontrol" name="last-name" type="text">
 													</div>
-												</div>
+												</div> -->
 												<div class="col-md-6 col-xl-4">
 													<div class="form-group">
-														<label>Phone Number</label>
-														<input class="form-control form-control-lg group_formcontrol" name="phone-number" type="text">
+														<label>Mobile Number</label>
+														<input class="form-control form-control-lg " value="{{Auth::user()->mobile}}" name="mobile_number" type="text">
 													</div>
 												</div>
 												<div class="col-md-6 col-xl-4">
 													<div class="form-group">
-														<label>Nick name <span class="">(Optional)</span></label>
-														<input class="form-control form-control-lg group_formcontrol" name="nick-name" type="text">
+														<label>Email</label>
+														<input disabled class="form-control form-control-lg " value="{{Auth::user()->email}}" name="email" type="text">
+													</div>
+												</div>
+												<div class="col-md-6 col-xl-4">
+													<div class="form-group">
+														<label>User name</label>
+														<input disabled class="form-control form-control-lg " value="{{Auth::user()->user_name}}" name="user_name" type="text">
 													</div>
 												</div>
 												<div class="col-md-6 col-xl-4">
 													<div class="form-group">
 														<label>Choose profile picture</label>
-														<div class="custom-input-file form-control form-control-lg group_formcontrol">
-															<input type="file" class="">
+														<div class="custom-input-file form-control form-control-lg ">
+															<input name="profile_pic" type="file" class="">
 															<span class="browse-btn">Browse File</span>
 														</div>
 													</div>
@@ -219,63 +224,56 @@
 												<div class="col-md-6 col-xl-4">
 													<div class="form-group">
 														<label>Location</label>
-														<input class="form-control form-control-lg group_formcontrol" name="location" type="text">
+														<input class="form-control form-control-lg "  value="{{Auth::user()->location}}" name="location" type="text">
 													</div>
 												</div>
 												<div class="col-md-12 col-xl-12">
 													<div class="form-group">
 														<label>Bio</label>
-														<textarea class="form-control form-control-lg group_formcontrol"></textarea>
+														<textarea class="form-control form-control-lg " name="bio">{{Auth::user()->bio}}</textarea>
 													</div>
 												</div>
 											</div>
-										</form>
 									</div>
 									<hr>
 									<div class="social-settings">
 										<h4>Social Links</h4>
 										<div class="form-col form-body">
-											<form action="https://dreamschat.dreamstechnologies.com/template-html/template2/index.html">
 												<div class="row">
 													<div class="col-md-6 col-xl-4">
 														<div class="form-group">
-															<input class="form-control form-control-lg group_formcontrol" name="facebook" type="text" placeholder="Facebook Link">
+															<input class="form-control form-control-lg " name="facebook" type="text" placeholder="Facebook Link">
 														</div>
 													</div>
 													<div class="col-md-6 col-xl-4">
 														<div class="form-group">
-															<input class="form-control form-control-lg group_formcontrol" name="twitter" type="text" placeholder="Twitter Link">
+															<input class="form-control form-control-lg " value="{{Auth::user()->twitter}}" name="twitter" type="text" placeholder="Twitter Link">
 														</div>
 													</div>
 													<div class="col-md-6 col-xl-4">
 														<div class="form-group">
-															<input class="form-control form-control-lg group_formcontrol" name="instagram" type="text" placeholder="Instagram Link">
+															<input class="form-control form-control-lg " value="{{Auth::user()->instagram}}" name="instagram" type="text" placeholder="Instagram Link">
 														</div>
 													</div>
 													<div class="col-md-6 col-xl-4">
 														<div class="form-group">
-															<input class="form-control form-control-lg group_formcontrol" name="linkedin" type="text" placeholder="Linkedin Link">
+															<input class="form-control form-control-lg " value="{{Auth::user()->linkedin}}" name="linkedin" type="text" placeholder="Linkedin Link">
 														</div>
 													</div>
 													<div class="col-md-6 col-xl-4">
-														<div class="form-group">
-															<input class="form-control form-control-lg group_formcontrol" name="youtube" type="text" placeholder="Youtube Link">
-														</div>
-													</div>
-												</div>
-												<div class="form-row profile_form m-0 align-items-center">
-													<div class="me-4">
-														<button type="button" class="btn btn-update  mb-0">
+														<button type="submit" class="btn btn-update  mb-0">
 														Update Details
 														</button>
 													</div>
-													<div class="cancel-btn">
-														<a href="#" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
-													</div>
+													
 												</div>
-											</form>
+												<div class="form-row profile_form m-0 align-items-center">
+													
+												</div>
+											
 										</div>
 									</div>
+									</form>
 								</div>
 								<div class="settings-delete mt-4">
 									<div class="row align-items-center justify-content-between">
@@ -380,7 +378,7 @@
 											<p>Brownsville, VT · Jun 11 at 10:05am</p>
 										</div>
 										<div class="logged-btn ms-auto">
-											<a href="#">Sign Out</a>
+											<a href="{{route('logout')}}">Sign Out</a>
 										</div>
 									</div>
 									<div class="logged-device align-items-center d-flex">
@@ -389,7 +387,7 @@
 											<p>Brownsville, VT · Jun 11 at 10:05am</p>
 										</div>
 										<div class="logged-btn ms-auto">
-											<a href="#">Sign Out</a>
+											<a href="{{route('logout')}}">Sign Out</a>
 										</div>
 									</div>
 									<div class="logged-device align-items-center d-flex">
@@ -398,7 +396,7 @@
 											<p>Brownsville, VT · Jun 11 at 10:05am</p>
 										</div>
 										<div class="logged-btn ms-auto">
-											<a href="#">Sign Out</a>
+											<a href="{{route('logout')}}">Sign Out</a>
 										</div>
 									</div>
 									<div class="logged-device align-items-center d-flex">
@@ -407,7 +405,7 @@
 											<p>Brownsville, VT · Jun 11 at 10:05am</p>
 										</div>
 										<div class="logged-btn ms-auto">
-											<a href="#">Sign Out</a>
+											<a href="{{route('logout')}}">Sign Out</a>
 										</div>
 									</div>
 								</div>

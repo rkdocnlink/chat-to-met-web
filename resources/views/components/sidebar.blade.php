@@ -6,7 +6,7 @@
         <div class="chat-menus">
             <ul>
                 <li>
-                    <a href="" class="chat-unread blue">
+                    <a href="{{route('dashboard')}}" class="chat-unread blue">
                         <span class="material-icons">message</span>
                         <span>Chats</span>
                     </a>
@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="chat-unread">
+                    <a href="{{route('profile')}}" class="chat-unread">
                         <span class="material-icons">settings</span>
                         <span>Settings</span>
                     </a>
