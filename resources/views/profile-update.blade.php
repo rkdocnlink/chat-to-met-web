@@ -37,7 +37,9 @@
 						<div class="profile-card">
 							<div class="profile-cover text-center mb-3">
 								<label class="profile-cover-avatar" for="avatar_upload">
+									@if(isset(Auth::user()->profile_pic) && !empty(Auth::user()->profile_pic))
 									<img class="avatar-img" src="{{URL::asset('uploads/user/profile_pic/')}}/{{Auth::user()->profile_pic}}" alt="Profile Image">
+									@endif
 									<input type="file" id="avatar_upload">
 									<span class="avatar-edit">
 										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 avatar-uploader-icon shadow-soft">
@@ -45,14 +47,14 @@
 										</svg>
 									</span>
 								</label>
-								<h5 class="mt-3 profile-name mb-1">{{Auth::user()->name}}</h5>
-								<p class="profile-email mb-1"><a href="https://dreamschat.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" >{{Auth::user()->email}}</a></p>
+								<h5 class="mt-3 profile-name mb-1">@if(isset(Auth::user()->name)){{Auth::user()->name}}@endif</h5>
+								<p class="profile-email mb-1"><a href="" class="__cf_email__" >@if(isset(Auth::user()->email)){{Auth::user()->email}}@endif</a></p>
 								<h5 class="profile-country mb-0">USA</h5>
 							</div>
 							<div class="profile-info">
 								<div class="text-center mb-4">
 									<p class="info-title mb-0">Phone</p>
-									<span class="info-text">{{Auth::user()->mobile}}</span>
+									<span class="info-text">@if(isset(Auth::user()->mobile)){{Auth::user()->mobile}}@endif</span>
 								</div>
 								<!-- <div class="text-center mb-4">
 									<p class="info-title mb-0">Nick Name</p>
@@ -64,16 +66,16 @@
 								</div> -->
 								<ul class="social-nav p-0 mb-0 text-center">
 									<li>
-										<a href="{{Auth::user()->facebook}}"><i class="fab fa-facebook-f"></i></a>
+										<a href="@if(isset(Auth::user()->facebook)){{Auth::user()->facebook}}@endif"><i class="fab fa-facebook-f"></i></a>
 									</li>
 									<li>
-										<a href="{{Auth::user()->instagram}}"><i class="fab fa-instagram"></i></a>
+										<a href="@if(isset(Auth::user()->instagram)){{Auth::user()->instagram}}@endif"><i class="fab fa-instagram"></i></a>
 									</li>
 									<li>
-										<a href="{{Auth::user()->linkedin}}"><i class="fab fa-linkedin-in"></i></a>
+										<a href="@if(isset(Auth::user()->linkedin)){{Auth::user()->linkedin}}@endif"><i class="fab fa-linkedin-in"></i></a>
 									</li>
 									<li>
-										<a href="{{Auth::user()->twitter}}"><i class="fab fa-twitter"></i></a>
+										<a href="@if(isset(Auth::user()->twitter)){{Auth::user()->twitter}}@endif"><i class="fab fa-twitter"></i></a>
 									</li>
 								</ul>
 							</div>
@@ -154,7 +156,7 @@
 						</div>
 						<div>
 							<h5>SETTINGS</h5>
-							<p>Last Update your profile:{{date('m  D Y ',strtotime(Auth::user()->updated_at))}}</p>
+							<p>Last Update your profile:@if(isset(Auth::user()->updated_at)){{date('m  D Y ',strtotime(Auth::user()->updated_at))}}@endif</p>
 						</div>
 					</div>
 					
