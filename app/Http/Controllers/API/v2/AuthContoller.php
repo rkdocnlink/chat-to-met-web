@@ -9,6 +9,7 @@ use App\Http\Requests\UserloginAPIRequest;
 use App\Http\Requests\UserRegisterAPIRequest;
 use App\Http\Requests\UserVerifyOTPAPIRequest;
 use App\Http\Resources\VerifyOTPResource;
+use App\Http\Resources\UserInfoResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Str;
 use Exception;
@@ -85,6 +86,7 @@ class AuthContoller extends Controller
   public function verifyOTP(UserVerifyOTPAPIRequest $request){
 
     try{
+
       if(User::where('account_token',$request->temp_access_token)->exists()){
         if(User::where('otp',$request->otp)->exists()){
              $user=User::where('account_token',$request->temp_access_token)->first();
@@ -112,7 +114,7 @@ class AuthContoller extends Controller
       public function userInfo(){
 
         $user=User::where('id',Auth::user()->id)->first();
-        return response()->json(['status'=>true,'message'=> $user],200);
+        return response()->json(['status'=>true,'data'=> new UserInfoResource($user)],200);
 
       }
 }
