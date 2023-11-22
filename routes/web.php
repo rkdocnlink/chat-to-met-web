@@ -19,15 +19,18 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-/******************Login************************/
+//----------------------------------Login-----------------------------/
 Route::get('login', [UserAuthController::class, 'viewLogin'])->name('login');
 Route::post('login', [UserAuthController::class, 'userLogin'])->name('user_login');
 
 
-/******************Register************************/
+//----------------------------------Register--------------------------/
 Route::get('register', [UserAuthController::class, 'viewRegister'])->name('register');
 Route::post('register', [UserAuthController::class, 'userRegister'])->name('user_register');
 Route::get('otp-verify', [UserAuthController::class, 'otpVerify'])->name('otp-verify');
 Route::post('otp-verify', [UserAuthController::class, 'userVerifyOTP'])->name('otp-verify-post');
+
+//----------------------------------Logout--------------------------/
+Route::get('logout', [UserAuthController::class, 'userLogOut'])->name('logout');
 
 Route::get('dashboard', [UserAuthController::class, 'viewDashboard'])->name('dashboard');

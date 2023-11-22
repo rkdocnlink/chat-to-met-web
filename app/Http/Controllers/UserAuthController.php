@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Str;
-use Auth,Session;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserAuthController extends Controller
 {
@@ -18,11 +19,11 @@ class UserAuthController extends Controller
 
         // }
 
-        return view('admin.login');
+        return view('login');
     }
 
     public function viewRegister(){
-        return view('admin.register');
+        return view('register');
     }
 
     public function viewDashboard(){
@@ -92,6 +93,11 @@ class UserAuthController extends Controller
        }
        
        
+    }
+
+    public function userLogOut(){
+        Auth::logout();
+        return redirect('login')->with(['otp'=>'logged out successfully']);
     }
 
     public function otpVerify(Request $request){

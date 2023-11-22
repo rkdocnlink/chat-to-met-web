@@ -33,39 +33,39 @@
                     <div class="form-group">
                         <label>Full Name</label>
                         <input placeholder="Full Name" value="{{old('full_name')}}" class="form-control form-control-warning   @error('full_name') is-invalid @enderror form-control-lg " name="full_name" type="text">
-                   <!-- @error('full_name')
+                   @error('full_name')
                     <span class="text text-danger" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror -->
+                    @enderror
                     </div>
                     
                     <div class="form-group">
                         <label>Email</label>
                         <input placeholder="Email" value="{{old('email')}}"  class="form-control @error('email') is-invalid @enderror form-control-lg " name="email" type="email">
-                   <!-- @error('email')
+                   @error('email')
                     <span class="text text-danger" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror -->
+                    @enderror
                     </div>
                     <div class="form-group">
                         <label>Password</label>
                         <input placeholder="Password" value="{{old('password')}}" class="form-control @error('password') is-invalid @enderror form-control-lg " name="password" type="password">
-                    <!-- @error('password')
+                    @error('password')
                     <span class="text text-danger" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror -->
+                    @enderror
                 </div>
                     <div class="form-group">
                         <label>Confirm Password</label>
                         <input placeholder="Confirm Password" value="{{old('confirm_password')}}" class="form-control @error('confirm_password') is-invalid @enderror form-control-lg " name="confirm_password" type="password">
-                        <!-- @error('confirm_password')
+                        @error('confirm_password')
                     <span class="text text-danger" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror -->
+                    @enderror
                     </div>
                    
                     <div class="pt-1">

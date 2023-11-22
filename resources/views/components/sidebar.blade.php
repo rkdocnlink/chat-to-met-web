@@ -69,7 +69,7 @@
                                 class="material-icons">settings</span></a>
                         <a href="" class="dropdown-item">Archived <span
                                 class="material-icons">flag</span></a>
-                        <a href="" class="dropdown-item">Logout <span
+                        <a href="{{route('logout')}}" class="dropdown-item">Logout <span
                                 class="material-icons">power_settings_new</span></a>
                     </div>
                 </li>
