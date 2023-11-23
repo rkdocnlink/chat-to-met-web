@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserViewController;
+use App\Http\Controllers\FriendManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +34,15 @@ Route::post('otp-verify', [UserAuthController::class, 'userVerifyOTP'])->name('o
 //----------------------------------Logout--------------------------/
 Route::get('logout', [UserAuthController::class, 'userLogOut'])->name('logout');
 
+
 //----------------------------------Profile--------------------------/
 Route::get('profile', [UserAuthController::class, 'userProfile'])->name('profile');
 Route::post('update-profile', [UserAuthController::class, 'userProfileUpdate'])->name('update-profile');
 
+
+//-----------------------------------Friends-------------------------/
+Route::POST('add-contact', [FriendManagementController::class,'addContact'])->name('add-contact');
+Route::POST('accept-contact', [FriendManagementController::class,'acceptContact'])->name('accept-contact');
+
+//-----------------------------------Dashboard-----------------------/
 Route::get('dashboard', [UserAuthController::class, 'viewDashboard'])->name('dashboard');

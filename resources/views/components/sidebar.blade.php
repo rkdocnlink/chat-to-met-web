@@ -5,12 +5,18 @@
     <div class="menus-col">
         <div class="chat-menus">
             <ul>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#my-contact-request">
+            <span class="material-icons">add_alert</span>
+                        <span>Notifications</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{route('dashboard')}}" class="chat-unread blue">
                         <span class="material-icons">message</span>
                         <span>Chats</span>
                     </a>
                 </li>
+                
                 <li>
                     <a href="" class="chat-unread pink">
                         <span class="material-icons">group</span>

@@ -17,10 +17,8 @@
 </div>
 <!-- /Main Wrapper -->
 	
-<!-- jQuery -->
-<script data-cfasync="false" src="{{URL::asset('assets/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery-3.6.0.min.js')}}"></script>
-    
+
+@include('modals.all-modals')
 <!-- Bootstrap Core JS -->
 <script src="{{URL::asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 

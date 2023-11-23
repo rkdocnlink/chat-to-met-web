@@ -41,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getContactList(){
+        return $this->hasOne(ContactList::class,'user_id_2','id')->where('status',0);
+    }
 }

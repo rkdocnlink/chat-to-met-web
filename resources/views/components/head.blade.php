@@ -16,7 +16,9 @@
 
   <!-- FancyBox CSS -->
   <link rel="stylesheet" href="{{URL::asset('assets/plugins/fancybox/jquery.fancybox.min.css')}}">
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- App CSS -->
   <link rel="stylesheet" href="{{URL::asset('assets/css/app.css')}}">
+  <script src="{{URL::asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+
   </head>

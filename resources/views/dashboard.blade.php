@@ -32,20 +32,32 @@
             <div class="top-online-contacts">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        @if(isset($list_contacts) && !empty($list_contacts) && $list_contacts->count()>0)
+                    @if(isset($list_contacts) && !empty($list_contacts) && $list_contacts->count()>0)
                         @foreach($list_contacts as $list_contact)
-                        <div class="swiper-slide">
-                            <div class="top-contacts-box">
-                                <div class="profile-img online">
-                                    <img src="assets/img/avatar/avatar-8.jpg" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>{{$list_contact->name}}</span>
+                            @if(check_contact_added_or_not(Auth::user()->id, $list_contact->id)==1)
+                            <div style="cursor: pointer;width: 100px !important;" class="swiper-slide">
+                                <div class="top-contacts-box">
+                                    <div class="profile-img online">
+                                        <img src="{{URL::asset('uploads/user/profile_pic/')}}/{{$list_contact->profile_pic}}" alt="">
+                                    </div>
+                                    <div class="profile-name">
+                                        <span>{{$list_contact->name}}</span>
+                                    </div>
+                                    <button     
+                                    onclick="getUserConnect({{$list_contact->id}})"
+                                    style="background-color: #420BA1;
+                                    border-color: #420BA1;
+                                    padding: 6px 12px;
+                                    color: #fff;
+                                    border-radius: 10px;" 
+                                    class="btn btn-update mb-1 send_{{$list_contact->id}}">
+                                    {{$list_contact->getContactList?$list_contact->getContactList->status==0?"✅Sent":"Send":"Send"}}
+                                    </button>
                                 </div>
                             </div>
-                        </div>
+                            @endif
                         @endforeach
-                        @endif
+                    @endif
                         
                     </div>
                 </div>
@@ -66,22 +78,26 @@
                 <!-- /Left Chat Title -->
 
                 <ul class="user-list mt-2">
-                    <li class="user-list-item">
-                        <div class="avatar avatar-online">
-                            <img src="assets/img/avatar/avatar-8.jpg" class="rounded-circle" alt="image">
-                        </div>
-                        <div class="users-list-body">
-                            <div>
-                                <h5>Regina Dickerson</h5>
-                                <p>It seems logical that the</p>
+                    @if(!empty($list_my_contacts) && isset($list_my_contacts) && $list_my_contacts->count()>0)
+                        @foreach($list_my_contacts as $list_my_contact)
+                        <li class="user-list-item">
+                            <div class="avatar avatar-online">
+                                <img src="{{URL::asset('uploads/user/profile_pic/')}}/{{$list_my_contact->getContactDetails->profile_pic}}" class="rounded-circle" alt="image">
                             </div>
-                            <div class="last-chat-time">
-                                <small class="text-muted">05 min</small>
-                                <div class="new-message-count">11</div>
+                            <div class="users-list-body">
+                                <div>
+                                    <h5>{{$list_my_contact->getContactDetails->name}}</h5>
+                                    <!-- <p>It seems logical that the</p> -->
+                                </div>
+                                <div class="last-chat-time">
+                                    <small class="text-muted">05 min</small>
+                                    <div class="new-message-count">11</div>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="user-list-item">
+                        </li>
+                        @endforeach
+                    @endif
+                    <!-- <li class="user-list-item">
                         <div>
                             <div class="avatar avatar-away">
                                 <img src="assets/img/avatar/avatar-9.jpg" class="rounded-circle" alt="image">
@@ -220,7 +236,7 @@
                                 <small class="text-muted">Yesterday</small>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
@@ -229,540 +245,38 @@
     </div>
     <!-- / Chats sidebar -->
 </div>
-<!-- sidebar group -->
-
-<!-- Chat -->
-<div class="chat" id="middle">
-    <div class="slimscroll">
-        <div class="chat-header">
-            <div class="user-details">
-                <div class="d-lg-none ms-2">
-                    <ul class="list-inline mt-2 me-2">
-                        <li class="list-inline-item">
-                            <a class="text-muted px-0 left_side" href="#" data-chat="open">
-                                <i class="fas fa-arrow-left"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <figure class="avatar ms-1">
-                    <img src="{{URL::asset('assets/img/avatar/avatar-8.jpg')}}" class="rounded-circle" alt="image">
-                </figure>
-                <div class="mt-1">
-                    <h5>Doris Brown</h5>
-                    <small class="online">
-                        Online
-                    </small>
-                </div>
-            </div>
-            <div class="chat-options">
-                <ul class="list-inline">
-                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search">
-                        <a href="javascript:void(0)" class="btn btn-outline-light chat-search-btn" >
-                            <i class="fas fa-search"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Voice call">
-                        <a href="javascript:void(0)" class="btn btn-outline-light" data-bs-toggle="modal"
-                            data-bs-target="#voice_call">
-                            <i class="fas fa-phone-alt voice_chat_phone"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Video call">
-                        <a href="javascript:void(0)" class="btn btn-outline-light" data-bs-toggle="modal"
-                            data-bs-target="#video_call">
-                            <i class="fas fa-video"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item dream_profile_menu" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
-                        <a href="javascript:void(0)" class="btn btn-outline-light">
-                            <i class="fas fa-user"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="btn btn-outline-light no-bg" href="#" data-bs-toggle="dropdown">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#" class="dropdown-item dream_profile_menu">Archive <span><i class="fas fa-archive"></i></span></a>
-                            <a href="#" class="dropdown-item">Muted <span class="material-icons">volume_off</span></a>
-                            <a href="#" class="dropdown-item">Delete <span><i class="far fa-trash-alt"></i></span></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- Chat Search -->
-            <div class="chat-search">
-                <form>
-                    <span class="fas fa-search form-control-feedback"></span>
-                    <input type="text" name="chat-search" placeholder="Search Chats" class="form-control">
-                    <div class="close-btn-chat"><span class="material-icons">close</span></div>
-                </form>
-            </div>
-            <!-- /Chat Search -->
-        </div>
-        <div class="chat-body">
-            <div class="messages">
-                <div class="chats">
-                    <div class="chat-avatar">
-                        <img src="{{URL::asset('assets/img/avatar/avatar-8.jpg')}}" class="rounded-circle dreams_chat" alt="image">
-                    </div>
-                    <div class="chat-content">
-                        <div class="message-content">
-                            Hi James! What’s Up?
-                            <div class="chat-time">
-                                <div>
-                                    <div class="time"><i class="fas fa-clock"></i> 10:00</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-profile-name">
-                            <h6>Doris Brown</h6>
-                        </div>
-                    </div>
-                    <div class="chat-action-btns ms-3">
-                        <div class="chat-action-col">
-                            <a class="#" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item dream_profile_menu">Copy <span ><i class="far fa-copy"></i></span></a>
-                                <a href="#" class="dropdown-item">Save <span class="material-icons">save</span></a>
-                                <a href="#" class="dropdown-item">Forward <span><i class="fas fa-share"></i></span></a>
-                                <a href="#" class="dropdown-item">Delete <span><i class="far fa-trash-alt"></i></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="chats chats-right">
-                    <div class="chat-content">
-                        <div class="message-content">
-                            Good morning, How are you? What about our next meeting?
-                            <div class="chat-time">
-                                <div>
-                                    <div class="time"><i class="fas fa-clock"></i> 10:00</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-profile-name text-end">
-                            <h6>Alexandr</h6>
-                        </div>
-                    </div>
-                    <div class="chat-avatar">
-                        <img src="{{URL::asset('assets/img/avatar/avatar-12.jpg')}}" class="rounded-circle dreams_chat" alt="image">
-                    </div>
-                    <div class="chat-action-btns me-2">
-                        <div class="chat-action-col">
-                            <a class="#" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item dream_profile_menu">Copy <span ><i class="far fa-copy"></i></span></a>
-                                <a href="#" class="dropdown-item">Save <span class="material-icons">save</span></a>
-                                <a href="#" class="dropdown-item">Forward <span><i class="fas fa-share"></i></span></a>
-                                <a href="#" class="dropdown-item">Delete <span><i class="far fa-trash-alt"></i></span></a>
-                            </div>
-                        </div>
-                        <div class="chat-read-col">
-                            <span class="material-icons">done_all</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="chats">
-                    <div class="chat-avatar">
-                        <img src="{{URL::asset('assets/img/avatar/avatar-8.jpg')}}" class="rounded-circle dreams_chat" alt="image">
-                    </div>
-                    <div class="chat-content">
-                        <div class="message-content">
-                            & Next meeting tomorrow 10.00AM
-                            <div class="chat-time">
-                                <div>
-                                    <div class="time"><i class="fas fa-clock"></i>  10:06</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-profile-name">
-                            <h6>Doris Brown</h6>
-                        </div>
-                    </div>
-                    <div class="chat-action-btns ms-3">
-                        <div class="chat-action-col">
-                            <a class="#" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item dream_profile_menu">Copy <span ><i class="far fa-copy"></i></span></a>
-                                <a href="#" class="dropdown-item">Save <span class="material-icons">save</span></a>
-                                <a href="#" class="dropdown-item">Forward <span><i class="fas fa-share"></i></span></a>
-                                <a href="#" class="dropdown-item">Delete <span><i class="far fa-trash-alt"></i></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="chat-line">
-                    <span class="chat-date">Today</span>
-                </div>
-                <div class="chats chats-right">
-                    <div class="chat-content">
-                        <div class="message-content">
-                            Wow Thats Great
-                            <div class="chat-time">
-                                <div>
-                                    <div class="time"><i class="fas fa-clock"></i> 10:02</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-profile-name text-end">
-                            <h6>Alexandr</h6>
-                        </div>
-                    </div>
-                    <div class="chat-avatar">
-                        <img src="{{URL::asset('assets/img/avatar/avatar-12.jpg')}}" class="rounded-circle dreams_chat" alt="image">
-                    </div>
-                    <div class="chat-action-btns me-2">
-                        <div class="chat-action-col">
-                            <a class="#" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item dream_profile_menu">Copy <span ><i class="far fa-copy"></i></span></a>
-                                <a href="#" class="dropdown-item">Save <span class="material-icons">save</span></a>
-                                <a href="#" class="dropdown-item">Forward <span><i class="fas fa-share"></i></span></a>
-                                <a href="#" class="dropdown-item">Delete <span><i class="far fa-trash-alt"></i></span></a>
-                            </div>
-                        </div>
-                        <div class="chat-read-col">
-                            <span class="material-icons">done_all</span>                                    
-                        </div>
-                    </div>
-                </div>
-                <div class="chats">
-                    <div class="chat-avatar">
-                        <img src="{{URL::asset('assets/img/avatar/avatar-8.jpg')}}" class="rounded-circle dreams_chat" alt="image">
-                    </div>
-                    <div class="chat-content">
-                        <div class="message-content">
-                            <div class="download-col">
-                                <ul>
-                                    <li>
-                                        <div class="image-download-col">
-                                            <a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-                                                <img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-                                            </a>
-                                            <div class="download-action d-flex align-items-center">
-                                                <div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-                                                <div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="image-download-col image-not-download">
-                                            <a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-                                                <img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-                                            </a>
-                                            <div class="download-action d-flex align-items-center">
-                                                <div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-                                                <div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="image-download-col image-not-download">
-                                            <a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-                                                <img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-                                            </a>
-                                            <div class="download-action d-flex align-items-center">
-                                                <div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-                                                <div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="chat-time">
-                                <div>
-                                    <div class="time"><i class="fas fa-clock"></i> 10:00</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-profile-name">
-                            <h6>Doris Brown</h6>
-                        </div>
-                    </div>
-                    <div class="chat-action-btns ms-3">
-                        <div class="chat-action-col">
-                            <a class="#" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item dream_profile_menu">Copy <span ><i class="far fa-copy"></i></span></a>
-                                <a href="#" class="dropdown-item">Save <span class="material-icons">save</span></a>
-                                <a href="#" class="dropdown-item">Forward <span><i class="fas fa-share"></i></span></a>
-                                <a href="#" class="dropdown-item">Delete <span><i class="far fa-trash-alt"></i></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="chats chats-right">
-                    <div class="chat-content">
-                        <div class="message-content">
-                            <div class="file-download d-flex align-items-center">
-                                <div class="file-type d-flex align-items-center justify-content-center me-2">
-                                    <i class="far fa-file-archive"></i>
-                                </div>
-                                <div class="file-details">
-                                    <span class="file-name">filename.zip</span>
-                                    <span class="file-size">10.6MB</span>
-                                </div>
-                                <div class="download-action d-flex align-items-center">
-                                    <div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-                                    <div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-                                </div>
-                            </div>
-                            <div class="chat-time">
-                                <div>
-                                    <div class="time"><i class="fas fa-clock"></i> 10:02</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat-profile-name text-end">
-                            <h6>Alexandr</h6>
-                        </div>
-                    </div>
-                    <div class="chat-avatar">
-                        <img src="{{URL::asset('assets/img/avatar/avatar-12.jpg')}}" class="rounded-circle dreams_chat" alt="image">
-                    </div>
-                    <div class="chat-action-btns me-2">
-                        <div class="chat-action-col">
-                            <a class="#" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item dream_profile_menu">Copy <span ><i class="far fa-copy"></i></span></a>
-                                <a href="#" class="dropdown-item">Save <span class="material-icons">save</span></a>
-                                <a href="#" class="dropdown-item">Forward <span><i class="fas fa-share"></i></span></a>
-                                <a href="#" class="dropdown-item">Delete <span><i class="far fa-trash-alt"></i></span></a>
-                            </div>
-                        </div>
-                        <div class="chat-read-col">
-                            <span class="material-icons">done_all</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    <div class="chat-footer">
-        <form>
-            <div class="smile-col">
-                <a href="#"><i class="far fa-smile"></i></a>
-            </div>
-            <div class="attach-col">
-                <a href="#"><i class="fas fa-paperclip"></i></a>
-            </div>
-            <input type="text" class="form-control chat_form" placeholder="Enter Message.....">
-            <div class="form-buttons">
-                <button class="btn send-btn" type="submit">
-                    <span class="material-icons">send</span>
-                </button>
-            </div>
-            <div class="specker-col">
-                <a href="#"><span class="material-icons">settings_voice</span></a>
-            </div>
-        </form>
-    </div>
-    </div>
-    <!-- /Chat -->
-
-            <!-- Right sidebar -->
-            <div class="right-sidebar right_sidebar_profile" id="middle1">
-                <div class="right-sidebar-wrap active">
-                <div class="slimscroll">
-                        <div class="left-chat-title d-flex justify-content-between align-items-center p-3">
-                            <div class="chat-title">
-                                <h4>PROFILE</h4>
-                            </div>
-                            <div class="contact-close_call text-end">
-                                <a href="#"
-                                    class="close_profile close_profile4">
-                                    <span class="material-icons">close</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="sidebar-body">
-                            <div class="mt-0 right_sidebar_logo">
-                                <div class="text-center mb-2 right-sidebar-profile">
-                                    <figure class="avatar avatar-xl mb-3">
-                                        <img src="{{URL::asset('assets/img/avatar/avatar-2.jpg')}}" class="rounded-circle" alt="image">
-                                    </figure>
-                                    <h5 class="profile-name">Scott Albright</h5>
-                                    <div class="online-profile">
-                                        <span>online</span>
-                                    </div>
-                                </div>
-                                <div>
-									 <div class="about-media-tabs">       
-										<nav>
-											<div class="nav nav-tabs justify-content-center" id="nav-tab">
-												<a class="nav-item nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#about">About</a>
-												<a class="nav-item nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#media" >Media</a>
-											</div>
-										</nav>
-										<div class="tab-content" id="nav-tabContent">
-											<div class="tab-pane fade show active" id="about">
-												<p>If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual.</p>
-												<div class="member-details">
-													<ul>
-														<li>
-															<h6>Phone</h6>
-															<span>555-555-21541</span>
-														</li>
-														<li>
-															<h6>Nick Name</h6>
-															<span>Alberywo</span>
-														</li>
-														<li>
-															<h6>Email</h6>
-															<span><a href="https://dreamschat.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1554797770676c627a557278747c793b767a78">[email&#160;protected]</a></span>
-														</li>
-													</ul>
-												</div>
-												<div class="social-media-col">
-													<h6>Social media accounts</h6>
-													<ul>
-														<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-														<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-														<li><a href="#"><i class="fab fa-youtube"></i></a></li>
-														<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-														<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-													</ul>
-												</div>
-												<div class="settings-col">
-													<h6>Settings</h6>
-													<ul>
-														<li class="d-flex align-items-center">
-															<label class="switch">
-																<input type="checkbox" checked>
-																<span class="slider round"></span>
-															</label>
-															<div>
-																<span>Block</span>
-															</div>
-														</li>
-														<li class="d-flex align-items-center">
-															<label class="switch">
-																<input type="checkbox">
-																<span class="slider round"></span>
-															</label>
-															<div>
-																<span>Mute</span>
-															</div>
-														</li>
-														<li class="d-flex align-items-center">
-															<label class="switch">
-																<input type="checkbox">
-																<span class="slider round"></span>
-															</label>
-															<div>
-																<span>Get notification</span>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-											<div class="tab-pane fade" id="media">
-												<div class="file-download-col">
-													<ul>
-														<li>
-															<div class="image-download-col">
-																<a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-																	<img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-																</a>
-																<div class="download-action d-flex align-items-center">
-																	<div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-																	<div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="image-download-col">
-																<a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-																	<img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-																</a>
-																<div class="download-action d-flex align-items-center">
-																	<div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-																	<div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-																</div>
-															</div>
-														</li>
-														 <li>
-															<div class="image-download-col">
-																<a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-																	<img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-																</a>
-																<div class="download-action d-flex align-items-center">
-																	<div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-																	<div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="image-download-col">
-																<a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-																	<img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-																</a>
-																<div class="download-action d-flex align-items-center">
-																	<div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-																	<div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-																</div>
-															</div>
-														</li>
-														 <li>
-															<div class="image-download-col">
-																<a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-																	<img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-																</a>
-																<div class="download-action d-flex align-items-center">
-																	<div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-																	<div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="image-download-col">
-																<a href="assets/img/chat-download.jpg" data-fancybox="gallery" class="fancybox">
-																	<img src="{{URL::asset('assets/img/chat-download.jpg')}}" alt="">
-																</a>
-																<div class="download-action d-flex align-items-center">
-																	<div><a href="#"><i class="fas fa-cloud-download-alt"></i></a></div>
-																	<div><a href="#"><i class="fas fa-ellipsis-h"></i></a></div>
-																</div>
-															</div>
-														</li>
-														<li class="full-width text-center">
-															<a href="#" class="load-more-btn">More 154 Files <i class="fas fa-sort-down"></i></a>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="report-col">
-							<ul>
-								<li><a href="#"><span class="material-icons">report_problem</span> Report Chat</a></li>
-								<li><a href="#"><span><i class="far fa-trash-alt"></i></span> Delete Chat</a></li>
-							</ul>
-						</div>
-					</div>
-                </div>
-            </div>
-            <!-- Right sidebar -->
 
         </div> 
         <!-- /Content -->
+        <script>
+              $(function () {
+     
+     $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+        });
+    })
+              function getUserConnect(getID){
+                   
+                        $.ajax({
+                                data: {friendID:getID},
+                                url: "{{ route('add-contact') }}",
+                                type: "POST",
+                                dataType: 'json',
+                                success: function (data) {
+                                    if(data.status==true){
+                                        $(".send_"+getID).text("✅Sent")
+                                    }
+                                },
+                                error: function (data) {
+                                    console.log('Error:', data);
+                                }
+                            });
+              }
+           
+
+              
+        </script>
 
 @endsection

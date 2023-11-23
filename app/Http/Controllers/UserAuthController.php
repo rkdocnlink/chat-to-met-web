@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\ContactList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -12,13 +14,6 @@ class UserAuthController extends Controller
 {
     //
     public function viewLogin(){
-
-        // if(Auth::user()){
-
-        //     return redirect('dashboard');
-
-        // }
-
         return view('login');
     }
 
@@ -27,8 +22,10 @@ class UserAuthController extends Controller
     }
 
     public function viewDashboard(){
-        $list_contacts=User::where('status',1)->get();
-        return view('dashboard',compact('list_contacts'));
+        // return ContactList::where('user_id_2',Auth::user()->id)->where('status',0)->get() ;
+        $list_contacts=User::where('status',1)->whereNotIn('id',[Auth::user()->id])->orderBy('id','DESC')->get();
+        $list_my_contacts=ContactList::where('user_id_1',Auth::user()->id)->where('status',1)->get();
+        return view('dashboard',compact('list_contacts','list_my_contacts'));
     }
 
 
