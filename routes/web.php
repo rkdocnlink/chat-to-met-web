@@ -37,6 +37,7 @@ Route::get('logout', [UserAuthController::class, 'userLogOut'])->name('logout');
 
 //----------------------------------Profile--------------------------/
 Route::get('profile', [UserAuthController::class, 'userProfile'])->name('profile');
+Route::get('profile-name', [UserAuthController::class, 'userProfile'])->name('profile-name');
 Route::post('update-profile', [UserAuthController::class, 'userProfileUpdate'])->name('update-profile');
 
 
