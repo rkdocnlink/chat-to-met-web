@@ -22,6 +22,8 @@ class AuthContoller extends Controller
           $user=User::where('email',$request->email)->first();
            if (Hash::check($request->password, $user->password)) {
              if(User::where('email',$request->email)->where('status',1)->exists()){
+              $credentials = request(['email', 'password']);
+              Auth::attempt($credentials);
               $userToken= $user->createToken(env('API_ACCESS_TOKEN'))->accessToken;
                 $user->access_token = $userToken;
                   return response()->json(['status'=>true,

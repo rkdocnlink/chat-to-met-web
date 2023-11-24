@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\v2\AuthContoller;
-use App\Http\Controllers\API\v2\DashboardAPIController;
+use App\Http\Controllers\API\v2\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,12 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->group( function () {
-
-     Route::get('user-info', [AuthContoller::class,'userInfo']);
-     Route::get('categories', [DashboardAPIController::class,'listCategory']);
-     Route::get('classes', [DashboardAPIController::class,'listClasses']);
-     Route::get('subjects', [DashboardAPIController::class,'listSubjects']);
-     
+   Route::get('users-list',[DashboardController::class,'getUsersList']); 
 });
 
 Route::post('user-login',[AuthContoller::class,'loginUser']); 
