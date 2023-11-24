@@ -72,7 +72,7 @@ class AuthContoller extends Controller
             $createUser->otp=$otp;
             $createUser->account_token=$accountToken;
             $createUser->save();
-            return response()->json(['status'=>true,'messaage'=>['error'=>['An OTP sent to your mail ID '. $otp]],'temp_access_token'=>$accountToken],200);
+            return response()->json(['status'=>true,'messaage'=>'An OTP sent to your mail ID '. $otp,'temp_access_token'=>$accountToken],200);
 
         }else{
           return response()->json(['status'=>false,'messaage'=>['error'=>[ 'Sorry this email is already exists']]]);
