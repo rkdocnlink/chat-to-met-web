@@ -94,10 +94,7 @@ class AuthContoller extends Controller
              $user->otp=NULL;
              $user->status=1;
              $user->save();
-             $userToken= $user->createToken(env('API_ACCESS_TOKEN'))->accessToken;
-             $user->access_token = $userToken;
-              return response()->json(['status'=>true,'messaage'=>'OTP verified successfully',
-                                     'data'=>new VerifyOTPResource($user)],200);
+              return response()->json(['status'=>true,'messaage'=>'OTP verified successfully. Please login to continue'],200);
         }else{
           return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry otp is invalid']]],200);
         }
@@ -112,7 +109,6 @@ class AuthContoller extends Controller
 }
 
       public function userInfo(){
-
         $user=User::where('id',Auth::user()->id)->first();
         return response()->json(['status'=>true,'data'=> new UserInfoResource($user)],200);
 
