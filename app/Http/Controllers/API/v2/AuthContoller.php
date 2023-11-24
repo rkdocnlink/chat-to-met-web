@@ -29,17 +29,17 @@ class AuthContoller extends Controller
                                         'auth_token'=>$userToken,
                                         'data'=>new UserResource($user)], 200);
                   }elseif(User::where('email',$request->email)->where('status',0)->exists()){
-                    return response()->json(['status'=>false,'messaage'=>'Sorry account is not verified'], 200);
+                    return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry account is not verified']]], 200);
                 }
            }else{
-               return response()->json(['status'=>false,'messaage'=>'Sorry invalid password'], 200);
+               return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry invalid password']]], 200);
            }
        }else{
-           return response()->json(['status'=>false,'messaage'=>'Sorry this email does not exists'], 200);
+           return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry this email does not exists']]], 200);
        }
 
       }catch(Exception $e){ 
-        return response()->json(['status'=>false,'messaage'=>$e->getMessage()],500);
+        return response()->json(['status'=>false,'messaage'=>['error'=>[$e->getMessage()]]],500);
       }
        
     }
@@ -72,13 +72,13 @@ class AuthContoller extends Controller
             $createUser->otp=$otp;
             $createUser->account_token=$accountToken;
             $createUser->save();
-            return response()->json(['status'=>true,'messaage'=>'An OTP sent to your mail ID '. $otp,'temp_access_token'=>$accountToken],200);
+            return response()->json(['status'=>true,'messaage'=>['error'=>['An OTP sent to your mail ID '. $otp]],'temp_access_token'=>$accountToken],200);
 
         }else{
-          return response()->json(['status'=>false,'messaage'=> 'Sorry this email is already exists']);
+          return response()->json(['status'=>false,'messaage'=>['error'=>[ 'Sorry this email is already exists']]]);
         }  
       }catch(Exception $e){ 
-        return response()->json(['status'=>false,'messaage'=>$e->getMessage()],500);
+        return response()->json(['status'=>false,'messaage'=>['error'=>[ $e->getMessage()]]],500);
       }
        
   }
@@ -99,14 +99,14 @@ class AuthContoller extends Controller
               return response()->json(['status'=>true,'messaage'=>'OTP verified successfully',
                                      'data'=>new VerifyOTPResource($user)],200);
         }else{
-          return response()->json(['status'=>false,'messaage'=>'Sorry otp is invalid'],200);
+          return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry otp is invalid']]],200);
         }
       }else{
-        return response()->json(['status'=>false,'messaage'=>'Sorry temporary account token is invalid'],200);
+        return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry temporary account token is invalid']]],200);
       }
      
     }catch(Exception $e){ 
-      return response()->json(['status'=>false,'messaage'=>$e->getMessage()],500);
+      return response()->json(['status'=>false,'messaage'=>['error'=>[ $e->getMessage()]]],500);
     }
 
 }
