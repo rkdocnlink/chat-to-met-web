@@ -12,6 +12,7 @@ class FriendManagementController extends Controller
     public function addContact(Request $request){
         if ($request->ajax()) {
             if(!ContactList::where("user_id_1", Auth::user()->id)->where('user_id_2',$request->friendID)->exists()){
+               
                 $addFriend=new ContactList();
                 $addFriend->user_id_1=Auth::user()->id;
                 $addFriend->user_id_2=$request->friendID;
@@ -25,6 +26,7 @@ class FriendManagementController extends Controller
                 $addFriend->type='receive';
                 $addFriend->status=0;
                 $addFriend->save();
+
                 return response()->json(['status'=>true,'message'=> 'Contact request added successfully.']);
             }else{
                 return response()->json(['status'=>false,'message'=> 'You have aleadry sent request to this contact']);

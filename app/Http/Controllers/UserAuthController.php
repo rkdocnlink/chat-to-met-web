@@ -84,7 +84,7 @@ class UserAuthController extends Controller
         $user->account_token=NULL;
         $user->status=1;
         $user->save();
-        return redirect('dashboard')->with('success','OTP verified successfull');
+        return redirect('login')->with('success','OTP verified successfull');
 
        }else{
         return redirect()->back()->with('error','Sorry OTP is not valid');
@@ -94,17 +94,15 @@ class UserAuthController extends Controller
     }
 
     public function userLogOut(){
+        Session::flush();
         Auth::logout();
-        return redirect('login')->with(['otp'=>'logged out successfully']);
+        return redirect('login')->with(['otp'=>'Logged out successfully']);
     }
 
     public function otpVerify(Request $request){
-
         return view('verify-otp');
-
     }
     public function userProfile(){
-
         return view('profile-update'); 
     }
 
@@ -132,10 +130,5 @@ class UserAuthController extends Controller
         $requestName->move(public_path($path), $imageName);
         return $imageName;
        }
-    // public function adminLogOut(){
-
-    //     Session::flush();
-    //     Auth::logout();
-    //     return redirect('/login');
-    // }
+   
 }

@@ -173,31 +173,30 @@
 						<h5 class="modal-title">
 							<span class="material-icons group-add-btn">group_add</span>Create a New Group
 						</h5>
+						<span class="create"></span>
 						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 						<span class="material-icons">close</span>
 						</button>
 					</div>
 					<div class="modal-body">
 						<!-- Card -->
-						<form action="https://dreamschat.dreamstechnologies.com/template-html/template2/new-friends">
+						<form method="post" action="{{ route('add-group') }}" enctype="multipart/form-data">
+							@csrf
 							<div class="form-group">
 								<label>Group Name</label>
-								<input class="form-control form-control-lg group_formcontrol" name="new-chat-title" type="text">
+								<input class="form-control form-control-lg group_formcontrol" name="group_name" type="text">
 							</div>
 							<div class="form-group">
 								<label>Choose profile picture</label>
 								<div class="custom-input-file form-control form-control-lg group_formcontrol">
-									<input type="file" class="">
+									<input type="file" name="group_image" class="">
 									<span class="browse-btn">Browse File</span>
 								</div>
 							</div>
-							<div class="form-group">
-								<label>Topic (optional)</label>
-								<input class="form-control form-control-lg group_formcontrol" name="new-chat-title" type="text">
-							</div>
+			
 							<div class="form-group">
 								<label>Description</label>
-								<textarea class="form-control form-control-lg group_formcontrol"></textarea>
+								<textarea name="group_desc" class="form-control form-control-lg group_formcontrol"></textarea>
 							</div>
 							<div class="form-group">
 								<div class="d-flex align-items-center">
@@ -211,7 +210,6 @@
 									</label>
 								</div>
 							</div>
-						</form>
 						<!-- Card -->
 						<div class="form-row profile_form text-end float-end m-0 align-items-center">
 							<!-- Button -->
@@ -219,11 +217,13 @@
 								<a href="#" data-bs-dismiss="modal" aria-label="Close">Cancel</a>
 							</div>
 							<div class="">
-								<button type="button" class="btn btn-block newgroup_create mb-0" data-bs-toggle="modal" data-bs-target="#add-group-member" data-bs-dismiss="modal" aria-label="Close">
-								Add Participants
+								<button type="submit" class="btn btn-block newgroup_create mb-0">
+								<!-- data-bs-toggle="modal" data-bs-target="#add-group-member" data-bs-dismiss="modal" aria-label="Close" -->
+								Create Group
 								</button>
 							</div>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -248,7 +248,6 @@
 							<input class="form-control chat_input" id="search-contact1" type="text" placeholder="Search Contacts">
 						</div>
 						<div class="sidebar">
-							<span class="contact-name-letter">A</span>
 							<ul class="user-list mt-2">
 								<li class="user-list-item">
 									<div class="avatar avatar-online">
@@ -261,57 +260,6 @@
 										<div class="last-chat-time">
 											<label class="custom-check">
 											<input type="checkbox" checked="checked">
-											<span class="checkmark"></span>
-											</label>
-										</div>
-									</div>
-								</li>
-								<li class="user-list-item">
-									<div class="avatar avatar-online">
-										<img src="assets/img/avatar/avatar-2.jpg" class="rounded-circle" alt="image">
-									</div>
-									<div class="users-list-body align-items-center">
-										<div>
-											<h5>Allison Etter</h5>
-										</div>
-										<div class="last-chat-time">
-											<label class="custom-check">
-											<input type="checkbox">
-											<span class="checkmark"></span>
-											</label>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<span class="contact-name-letter mt-3">C</span>
-							<ul class="user-list mt-2">
-								<li class="user-list-item">
-									<div class="avatar avatar-online">
-										<img src="assets/img/avatar/avatar-3.jpg" class="rounded-circle" alt="image">
-									</div>
-									<div class="users-list-body align-items-center">
-										<div>
-											<h5>Craig Smiley</h5>
-										</div>
-										<div class="last-chat-time">
-											<label class="custom-check">
-											<input type="checkbox">
-											<span class="checkmark"></span>
-											</label>
-										</div>
-									</div>
-								</li>
-								<li class="user-list-item">
-									<div class="avatar avatar-online">
-										<img src="assets/img/avatar/avatar-4.jpg" class="rounded-circle" alt="image">
-									</div>
-									<div class="users-list-body align-items-center">
-										<div>
-											<h5>Caniel Clay</h5>
-										</div>
-										<div class="last-chat-time">
-											<label class="custom-check">
-											<input type="checkbox">
 											<span class="checkmark"></span>
 											</label>
 										</div>
@@ -404,25 +352,42 @@
 					}
 					});
 				})
-              function getContactRequest(getID){
-                   
-                        $.ajax({
-                                data: {friendID:getID},
-                                url: "{{ route('accept-contact') }}",
-                                type: "POST",
-                                dataType: 'json',
-                                success: function (data) {
-                                    if(data.status==true){
-                                        $(".accept_"+getID).text("✅Accepted")
-                                    }
-                                },
-                                error: function (data) {
-                                    console.log('Error:', data);
-                                }
-                            });
-              }
+            function getContactRequest(getID){
+			$.ajax({
+					data: {friendID:getID},
+					url: "{{ route('accept-contact') }}",
+					type: "POST",
+					dataType: 'json',
+					success: function (data) {
+						if(data.status==true){
+							$(".accept_"+getID).text("✅Accepted")
+						}
+					},
+					error: function (data) {
+						console.log('Error:', data);
+					}
+				});
+            }
            
+			$(document).ready(function(){
+				$('#createGroupForm').submit(function(e){
+					e.preventDefault();
 
+					$.ajax({
+						url: "{{ route('add-group') }}",
+						type: "POST",
+						data: new FormData(this),
+						contentType:false,
+						cache: false,
+						processData:false,
+						success:function(data){
+							if(data.status==true){
+								$(".create").text("Group Created Successfully")
+							}
+						}
+					});
+				});
+			});
               
         </script>
 		<!-- / My contact request -->

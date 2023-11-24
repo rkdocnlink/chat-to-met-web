@@ -18,7 +18,7 @@
                 </li>
                 
                 <li>
-                    <a href="" class="chat-unread pink">
+                    <a href="{{route('add-group')}}" class="chat-unread pink">
                         <span class="material-icons">group</span>
                         <span>Groups</span>
                     </a>

@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             [
             'name'=>'ramkesh',
             'email'=> 'ramkesh@gmail.com',
-            'password'=> bcrypt('123456'),
+            'password'=> bcrypt('12345678'),
             'mobile'=> '1234567890',
             'role'=>'1',
             ]

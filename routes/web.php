@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserViewController;
 use App\Http\Controllers\FriendManagementController;
-
+use App\Http\Controllers\GroupController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +44,11 @@ Route::post('update-profile', [UserAuthController::class, 'userProfileUpdate'])-
 //-----------------------------------Friends-------------------------/
 Route::POST('add-contact', [FriendManagementController::class,'addContact'])->name('add-contact');
 Route::POST('accept-contact', [FriendManagementController::class,'acceptContact'])->name('accept-contact');
+
+
+//-----------------------------------Group-------------------------/
+Route::get('add-group', [GroupController::class,'viewGroupDashboard'])->name('viewGroupDashboard');
+Route::POST('add-group', [GroupController::class,'addGroup'])->name('add-group');
 
 //-----------------------------------Dashboard-----------------------/
 Route::get('dashboard', [UserAuthController::class, 'viewDashboard'])->name('dashboard');
