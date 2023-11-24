@@ -34,9 +34,8 @@ class UserStoreRequest extends FormRequest
     public function failedValidation(Validator $validator){
 
         throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'errors'      => $validator->errors()
+            'status'   => false,
+            'message'   => $validator->errors()
         ]));
 
     }
