@@ -10,7 +10,7 @@
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:oMpYayMBz0pQQVysItv2hGNv/NnDMyWQLUeSfzGb85k=',
+    'key' => 'base64:eFcvqW2Xbo1gS76J/fu8BkGWXNXb/X79PwqrPSnao4o=',
     'cipher' => 'AES-256-CBC',
     'maintenance' => 
     array (
@@ -200,7 +200,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\framework/cache/data',
+        'path' => '/var/www/html/chat-to-met-web/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -295,7 +295,7 @@
         'port' => '3306',
         'database' => 'chat_to_met',
         'username' => 'root',
-        'password' => '',
+        'password' => 'NEWPASSWORD',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -315,7 +315,7 @@
         'port' => '3306',
         'database' => 'chat_to_met',
         'username' => 'root',
-        'password' => '',
+        'password' => 'NEWPASSWORD',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -330,7 +330,7 @@
         'port' => '3306',
         'database' => 'chat_to_met',
         'username' => 'root',
-        'password' => '',
+        'password' => 'NEWPASSWORD',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -373,13 +373,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\app',
+        'root' => '/var/www/html/chat-to-met-web/storage/app',
         'throw' => false,
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\app/public',
+        'root' => '/var/www/html/chat-to-met-web/storage/app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
         'throw' => false,
@@ -399,7 +399,7 @@
     ),
     'links' => 
     array (
-      'D:\\xampp\\htdocs\\chat-to-met-web\\public\\storage' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\app/public',
+      '/var/www/html/chat-to-met-web/public/storage' => '/var/www/html/chat-to-met-web/storage/app/public',
     ),
   ),
   'hashing' => 
@@ -418,7 +418,7 @@
   ),
   'jwt' => 
   array (
-    'secret' => 'GvxDf7DuwaVnXn4Yk0gSMnz3hkijY5dwtUPgsiqbZHyIl30hucnkSFfxwTm6xKk3',
+    'secret' => NULL,
     'keys' => 
     array (
       'public' => NULL,
@@ -475,13 +475,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\logs/laravel.log',
+        'path' => '/var/www/html/chat-to-met-web/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\logs/laravel.log',
+        'path' => '/var/www/html/chat-to-met-web/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -533,7 +533,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\logs/laravel.log',
+        'path' => '/var/www/html/chat-to-met-web/storage/logs/laravel.log',
       ),
     ),
   ),
@@ -599,7 +599,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'D:\\xampp\\htdocs\\chat-to-met-web\\resources\\views/vendor/mail',
+        0 => '/var/www/html/chat-to-met-web/resources/views/vendor/mail',
       ),
     ),
   ),
@@ -706,7 +706,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\framework/sessions',
+    'files' => '/var/www/html/chat-to-met-web/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -726,9 +726,9 @@
   array (
     'paths' => 
     array (
-      0 => 'D:\\xampp\\htdocs\\chat-to-met-web\\resources\\views',
+      0 => '/var/www/html/chat-to-met-web/resources/views',
     ),
-    'compiled' => 'D:\\xampp\\htdocs\\chat-to-met-web\\storage\\framework\\views',
+    'compiled' => '/var/www/html/chat-to-met-web/storage/framework/views',
   ),
   'passport' => 
   array (
@@ -745,7 +745,7 @@
   'livewire' => 
   array (
     'class_namespace' => 'App\\Http\\Livewire',
-    'view_path' => 'D:\\xampp\\htdocs\\chat-to-met-web\\resources\\views/livewire',
+    'view_path' => '/var/www/html/chat-to-met-web/resources/views/livewire',
     'layout' => 'layouts.app',
     'asset_url' => NULL,
     'app_url' => NULL,
@@ -854,7 +854,7 @@
     array (
     ),
     'enable_runnable_solutions' => NULL,
-    'remote_sites_path' => 'D:\\xampp\\htdocs\\chat-to-met-web',
+    'remote_sites_path' => '/var/www/html/chat-to-met-web',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
