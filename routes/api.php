@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group( function () {
    Route::get('users-list',[DashboardController::class,'getUsersList']); 
+   Route::get('send-contact-request',[DashboardController::class,'sendContactRequest']); 
+   Route::get('accept-contact-request',[DashboardController::class,'acceptContactRequest']); 
 });
 
 Route::post('user-login',[AuthContoller::class,'loginUser']); 
