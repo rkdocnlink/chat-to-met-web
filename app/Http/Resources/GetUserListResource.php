@@ -18,7 +18,7 @@ class GetUserListResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'email'=>$this->email,
-            'profile_picture'=>\Illuminate\Support\Facades\URL::asset('uploades/user/profile_pic/').'/'.$this->profile_pic,
+            'profile_picture'=>\Illuminate\Support\Facades\URL::asset('uploads/user/profile_pic/').'/'.$this->profile_pic,
         ];
     }
 }
