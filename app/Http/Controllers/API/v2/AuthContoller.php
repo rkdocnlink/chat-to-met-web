@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Http\Requests\UserloginAPIRequest;
 use App\Http\Requests\UserRegisterAPIRequest;
 use App\Http\Requests\UserVerifyOTPAPIRequest;
-use App\Http\Resources\VerifyOTPResource;
 use App\Http\Resources\UserInfoResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Str;
