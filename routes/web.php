@@ -1,9 +1,6 @@
 <?php
-
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\UserViewController;
 use App\Http\Controllers\FriendManagementController;
 use App\Http\Controllers\GroupController;
 /*

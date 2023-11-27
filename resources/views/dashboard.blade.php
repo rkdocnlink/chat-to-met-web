@@ -167,7 +167,7 @@
               
             /*****************************************************************************
              * 
-             **********                       User Specific User To CHAT              ****
+             **********                 User Specific User To CHAT                    ****
              * 
              ****************************************************************************/
               function getContactChat(getID){
@@ -182,25 +182,9 @@
                            type: "POST",
                            dataType: 'json',
                            success: function (data) {
-                            console.log(data)
                                if(data.status==true){
                                    $(".getUserID").val(getID)
                                    $(".myChat").html(data.data)
-                                   $.ajax({
-                                        data: {friendID:getID},
-                                        url: "{{ route('load-chat') }}",
-                                        type: "POST",
-                                        dataType: 'json',
-                                        success: function (data) {
-                                        console.log(data)
-                                            if(data.status==true){
-                                                $(".chat-body").html(data.data)
-                                            }
-                                        },
-                                        error: function (data) {
-                                            console.log('Error:', data);
-                                        }
-                                    });
                                }
                            },
                            error: function (data) {
@@ -208,23 +192,7 @@
                            }
                        });
                   }
-
-             /*****************************************************************************
-             * 
-             **********                       Load Chat For Specific User              ****
-             * 
-             ****************************************************************************/  
-                 
-                function loadChat(chatRecordID){
-                    return 123;
-                    $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });      
-                       
-
-                }  
+ 
           
              /*****************************************************************************
              * 
@@ -261,13 +229,33 @@
                        });
                     }
                 })
-
-                var user_id=$(".getUserID").val();
-                if(user_id){
-                    setTimeout(()=>{
-                        getContactChat(user_id)
-                    },1000)
+              
+                function loadChatUser(USER_ID_CHAT){
+                    $.ajax({
+                            data: {friendID:USER_ID_CHAT},
+                            url: "{{ route('load-chat') }}",
+                            type: "POST",
+                            dataType: 'json',
+                            success: function (data) {
+    
+                                if(data.status==true){
+                                    $(".chat-body").html(data.data)
+                                }
+                            },
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
                 }
+               
+                $(document).ready(function(){
+                    
+                    setInterval(()=>{
+                        var user_id=$(".getUserID").val();
+                        loadChatUser(user_id)
+                    },1000)
+                
+                })
               
         </script>
 
