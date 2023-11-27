@@ -26,9 +26,9 @@ class UserRegisterAPIRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:6', 
+            'name' => 'required|min:2', 
             'email' => 'required|email', 
-            'password' => 'required|min:6|max:150|same:confirm_password',
+            'password' => 'required|min:8|max:150|same:confirm_password',
             'confirm_password' => 'required', 
         ];
     }
