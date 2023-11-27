@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Requests\UserloginAPIRequest;
 use App\Http\Requests\UserRegisterAPIRequest;
 use App\Http\Requests\UserVerifyOTPAPIRequest;
+use App\Http\Resources\VerifyOTPResource;
 use App\Http\Resources\UserInfoResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Str;
@@ -26,21 +27,21 @@ class AuthContoller extends Controller
               $userToken= $user->createToken(env('API_ACCESS_TOKEN'))->accessToken;
                 $user->access_token = $userToken;
                   return response()->json(['status'=>true,
-                                        'message'=>'Login Successfull',
+                                        'messaage'=>'Login Successfull',
                                         'auth_token'=>$userToken,
                                         'data'=>new UserResource($user)], 200);
                   }elseif(User::where('email',$request->email)->where('status',0)->exists()){
-                    return response()->json(['status'=>false,'message'=>['error'=>['Sorry account is not verified']]], 200);
+                    return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry account is not verified']]], 200);
                 }
            }else{
-               return response()->json(['status'=>false,'message'=>['error'=>['Sorry invalid password']]], 200);
+               return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry invalid password']]], 200);
            }
        }else{
-           return response()->json(['status'=>false,'message'=>['error'=>['Sorry this email does not exists']]], 200);
+           return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry this email does not exists']]], 200);
        }
 
       }catch(Exception $e){ 
-        return response()->json(['status'=>false,'message'=>['error'=>[$e->getMessage()]]],500);
+        return response()->json(['status'=>false,'messaage'=>['error'=>[$e->getMessage()]]],500);
       }
        
     }
@@ -59,7 +60,7 @@ class AuthContoller extends Controller
             $createUser->otp=$otp;
             $createUser->account_token=$accountToken;
             $createUser->save();
-            return response()->json(['status'=>true,'message'=>'An OTP sent to your mail ID '. $otp,'temp_access_token'=>$accountToken],200);
+            return response()->json(['status'=>true,'messaage'=>'An OTP sent to your mail ID '. $otp,'temp_access_token'=>$accountToken],200);
 
         }
         else if(User::where('email',$request->email)->where('status',0)->exists()){
@@ -73,13 +74,13 @@ class AuthContoller extends Controller
             $createUser->otp=$otp;
             $createUser->account_token=$accountToken;
             $createUser->save();
-            return response()->json(['status'=>true,'message'=>'An OTP sent to your mail ID '. $otp,'temp_access_token'=>$accountToken],200);
+            return response()->json(['status'=>true,'messaage'=>'An OTP sent to your mail ID '. $otp,'temp_access_token'=>$accountToken],200);
 
         }else{
-          return response()->json(['status'=>false,'message'=>['error'=>[ 'Sorry this email is already exists']]]);
+          return response()->json(['status'=>false,'messaage'=>['error'=>[ 'Sorry this email is already exists']]]);
         }  
       }catch(Exception $e){ 
-        return response()->json(['status'=>false,'message'=>['error'=>[ $e->getMessage()]]],500);
+        return response()->json(['status'=>false,'messaage'=>['error'=>[ $e->getMessage()]]],500);
       }
        
   }
@@ -95,16 +96,16 @@ class AuthContoller extends Controller
              $user->otp=NULL;
              $user->status=1;
              $user->save();
-              return response()->json(['status'=>true,'message'=>'OTP verified successfully. Please login to continue'],200);
+              return response()->json(['status'=>true,'messaage'=>'OTP verified successfully. Please login to continue'],200);
         }else{
-          return response()->json(['status'=>false,'message'=>['error'=>['Sorry otp is invalid']]],200);
+          return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry otp is invalid']]],200);
         }
       }else{
-        return response()->json(['status'=>false,'message'=>['error'=>['Sorry temporary account token is invalid']]],200);
+        return response()->json(['status'=>false,'messaage'=>['error'=>['Sorry temporary account token is invalid']]],200);
       }
      
     }catch(Exception $e){ 
-      return response()->json(['status'=>false,'message'=>['error'=>[ $e->getMessage()]]],500);
+      return response()->json(['status'=>false,'messaage'=>['error'=>[ $e->getMessage()]]],500);
     }
 
 }

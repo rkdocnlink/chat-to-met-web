@@ -27,7 +27,7 @@ class UserloginAPIRequest extends FormRequest
     {
         return [
             'email' => 'required|email', 
-            'password' => 'required|min:6|max:150',
+            'password' => 'required|min:8|max:150',
         ];
     }
 

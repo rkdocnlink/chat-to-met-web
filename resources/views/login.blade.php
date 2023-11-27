@@ -43,6 +43,11 @@
                         <form action="{{route('user_login')}}" method="POST">
                             @csrf
                             <div class="form-group">
+                                @if(Session::get('error'))
+                                    <span class="text text-danger" role="alert">
+                                    <strong>{{ Session::get('error') }}</strong>
+                                    </span><br/>
+                                @endif
                                 <label>Your Email</label>
                                 <input class="form-control form-control-lg @error('email') is-invalid @enderror " name="email" type="email">
                                 @error('email')
