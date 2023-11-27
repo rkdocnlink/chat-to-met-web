@@ -6,6 +6,7 @@ use App\Models\ContactList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\ChatContact;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -130,5 +131,25 @@ class UserAuthController extends Controller
         $requestName->move(public_path($path), $imageName);
         return $imageName;
        }
+
+    public function getChat(Request $request){
+        $ContactData=User::where('id',$request->friendID)->first();
+        $chat = ChatContact::whereRaw('FIND_IN_SET("'.$request->friendID.'",both_id)')->get();
+        $getChat=view('chat.contact-chat',['chats'=>$chat,'ContactData'=>$ContactData])->render();
+        return response()->json(['status'=>true,'request'=>$request->friendID,'data'=>$getChat]);
+    }   
+
+    public function sendMessage(Request $request){
+         
+        $ChatContact=new ChatContact();
+        $ChatContact->user_id=Auth::user()->id;
+        $ChatContact->both_id=Auth::user()->id.",".$request->friendID;
+        $ChatContact->type='send';
+        $ChatContact->messgae=$request->message;
+        $ChatContact->status=1;
+        $ChatContact->trash=0;
+        $ChatContact->save();
+        return response()->json(['status'=>true,'request'=>$request->friendID,'message'=>'message sent']);
+    }
    
 }

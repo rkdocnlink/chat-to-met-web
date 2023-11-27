@@ -42,13 +42,15 @@ Route::post('update-profile', [UserAuthController::class, 'userProfileUpdate'])-
 
 
 //-----------------------------------Friends-------------------------/
-Route::POST('add-contact', [FriendManagementController::class,'addContact'])->name('add-contact');
-Route::POST('accept-contact', [FriendManagementController::class,'acceptContact'])->name('accept-contact');
+Route::post('add-contact', [FriendManagementController::class,'addContact'])->name('add-contact');
+Route::post('accept-contact', [FriendManagementController::class,'acceptContact'])->name('accept-contact');
 
 
 //-----------------------------------Group-------------------------/
 Route::get('add-group', [GroupController::class,'viewGroupDashboard'])->name('viewGroupDashboard');
-Route::POST('add-group', [GroupController::class,'addGroup'])->name('add-group');
+Route::post('add-group', [GroupController::class,'addGroup'])->name('add-group');
 
 //-----------------------------------Dashboard-----------------------/
 Route::get('dashboard', [UserAuthController::class, 'viewDashboard'])->name('dashboard');
+Route::post('get-chat', [UserAuthController::class, 'getChat'])->name('get-chat');
+Route::post('send-message', [UserAuthController::class, 'sendMessage'])->name('send-message');
