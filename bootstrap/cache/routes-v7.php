@@ -265,7 +265,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::KE6SJh5Lg6O8iMLV',
+            '_route' => 'generated::CjLOgUVyiPTPzwfe',
           ),
           1 => NULL,
           2 => 
@@ -285,7 +285,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bAPGKAlQqiZQtsbd',
+            '_route' => 'generated::2jzunKrADk1YpwXR',
           ),
           1 => NULL,
           2 => 
@@ -363,7 +363,47 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::sKUEACVKUchP0hJc',
+            '_route' => 'generated::UqbkDj8FYH8PJkxF',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/api/v1/user/send-contact-request' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::94qJlOLNgerEIiNn',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/api/v1/user/accept-contact-request' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'generated::56r83IAWuzM4E14b',
           ),
           1 => NULL,
           2 => 
@@ -383,7 +423,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Z2EXddLQQpd8XuSp',
+            '_route' => 'generated::HwGHUOqQTEdQK4af',
           ),
           1 => NULL,
           2 => 
@@ -402,7 +442,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::lbMlfRFjb6PeKO4v',
+            '_route' => 'generated::mNBqwjR4Ti7sCgLy',
           ),
           1 => NULL,
           2 => 
@@ -421,7 +461,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::3GOGO3KySgyupyZq',
+            '_route' => 'generated::SwONyHLiytumssjc',
           ),
           1 => NULL,
           2 => 
@@ -440,7 +480,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::gNfM45UUExs6AGlM',
+            '_route' => 'generated::0yGR2qziJccKDHFw',
           ),
           1 => NULL,
           2 => 
@@ -728,6 +768,63 @@ app('router')->setCompiledRoutes(
           array (
             'GET' => 0,
             'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/get-chat' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'get-chat',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/send-message' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'send-message',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/load-chat' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'load-chat',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
           ),
           3 => NULL,
           4 => false,
@@ -1624,7 +1721,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::KE6SJh5Lg6O8iMLV' => 
+    'generated::CjLOgUVyiPTPzwfe' => 
     array (
       'methods' => 
       array (
@@ -1636,7 +1733,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@source',
         'controller' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@source',
-        'as' => 'generated::KE6SJh5Lg6O8iMLV',
+        'as' => 'generated::CjLOgUVyiPTPzwfe',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1652,7 +1749,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bAPGKAlQqiZQtsbd' => 
+    'generated::2jzunKrADk1YpwXR' => 
     array (
       'methods' => 
       array (
@@ -1664,7 +1761,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@maps',
         'controller' => 'Livewire\\Controllers\\LivewireJavaScriptAssets@maps',
-        'as' => 'generated::bAPGKAlQqiZQtsbd',
+        'as' => 'generated::2jzunKrADk1YpwXR',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1789,7 +1886,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::sKUEACVKUchP0hJc' => 
+    'generated::UqbkDj8FYH8PJkxF' => 
     array (
       'methods' => 
       array (
@@ -1811,7 +1908,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::sKUEACVKUchP0hJc',
+        'as' => 'generated::UqbkDj8FYH8PJkxF',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1827,7 +1924,83 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Z2EXddLQQpd8XuSp' => 
+    'generated::94qJlOLNgerEIiNn' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'api/v1/user/send-contact-request',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'api',
+          1 => 'auth:api',
+        ),
+        'uses' => 'App\\Http\\Controllers\\API\\v2\\DashboardController@sendContactRequest',
+        'controller' => 'App\\Http\\Controllers\\API\\v2\\DashboardController@sendContactRequest',
+        'namespace' => NULL,
+        'prefix' => 'api/v1/user',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::94qJlOLNgerEIiNn',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::56r83IAWuzM4E14b' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'api/v1/user/accept-contact-request',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'api',
+          1 => 'auth:api',
+        ),
+        'uses' => 'App\\Http\\Controllers\\API\\v2\\DashboardController@acceptContactRequest',
+        'controller' => 'App\\Http\\Controllers\\API\\v2\\DashboardController@acceptContactRequest',
+        'namespace' => NULL,
+        'prefix' => 'api/v1/user',
+        'where' => 
+        array (
+        ),
+        'as' => 'generated::56r83IAWuzM4E14b',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::HwGHUOqQTEdQK4af' => 
     array (
       'methods' => 
       array (
@@ -1847,7 +2020,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Z2EXddLQQpd8XuSp',
+        'as' => 'generated::HwGHUOqQTEdQK4af',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1863,7 +2036,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::lbMlfRFjb6PeKO4v' => 
+    'generated::mNBqwjR4Ti7sCgLy' => 
     array (
       'methods' => 
       array (
@@ -1883,7 +2056,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::lbMlfRFjb6PeKO4v',
+        'as' => 'generated::mNBqwjR4Ti7sCgLy',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1899,7 +2072,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::3GOGO3KySgyupyZq' => 
+    'generated::SwONyHLiytumssjc' => 
     array (
       'methods' => 
       array (
@@ -1919,7 +2092,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::3GOGO3KySgyupyZq',
+        'as' => 'generated::SwONyHLiytumssjc',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1935,7 +2108,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::gNfM45UUExs6AGlM' => 
+    'generated::0yGR2qziJccKDHFw' => 
     array (
       'methods' => 
       array (
@@ -1949,15 +2122,15 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:264:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:46:"function () {
+        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:266:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:48:"function () {
     return \\redirect(\'login\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006820000000000000000";}";s:4:"hash";s:44:"pwWRlgmtKWWJ+p4ADlwQ6NGmW7NIuPmz826pwpOhGqE=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006830000000000000000";}";s:4:"hash";s:44:"BrcQS7OPsiBzYZ6nm3waCsGDc0czjpjPCGWFVL5Ptb0=";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::gNfM45UUExs6AGlM',
+        'as' => 'generated::0yGR2qziJccKDHFw',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2506,6 +2679,114 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'dashboard',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'get-chat' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'get-chat',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UserAuthController@getChat',
+        'controller' => 'App\\Http\\Controllers\\UserAuthController@getChat',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'get-chat',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'send-message' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'send-message',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UserAuthController@sendMessage',
+        'controller' => 'App\\Http\\Controllers\\UserAuthController@sendMessage',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'send-message',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'load-chat' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'load-chat',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\UserAuthController@getChatLoad',
+        'controller' => 'App\\Http\\Controllers\\UserAuthController@getChatLoad',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'load-chat',
       ),
       'fallback' => false,
       'defaults' => 

@@ -54,3 +54,4 @@ Route::post('add-group', [GroupController::class,'addGroup'])->name('add-group')
 Route::get('dashboard', [UserAuthController::class, 'viewDashboard'])->name('dashboard');
 Route::post('get-chat', [UserAuthController::class, 'getChat'])->name('get-chat');
 Route::post('send-message', [UserAuthController::class, 'sendMessage'])->name('send-message');
+Route::post('load-chat', [UserAuthController::class, 'getChatLoad'])->name('load-chat');

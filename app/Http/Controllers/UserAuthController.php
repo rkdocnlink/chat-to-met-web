@@ -134,10 +134,15 @@ class UserAuthController extends Controller
 
     public function getChat(Request $request){
         $ContactData=User::where('id',$request->friendID)->first();
+        $getChat=view('chat.contact-chat',['ContactData'=>$ContactData])->render();
+        return response()->json(['status'=>true,'data'=>$getChat]);
+    } 
+    
+    public function getChatLoad(Request $request){
         $chat = ChatContact::whereRaw('FIND_IN_SET("'.$request->friendID.'",both_id)')->get();
-        $getChat=view('chat.contact-chat',['chats'=>$chat,'ContactData'=>$ContactData])->render();
-        return response()->json(['status'=>true,'request'=>$request->friendID,'data'=>$getChat]);
-    }   
+        $getChat=view('chat.load-chat',['chats'=>$chat])->render();
+        return response()->json(['status'=>true,'data'=>$getChat]);
+    } 
 
     public function sendMessage(Request $request){
          
