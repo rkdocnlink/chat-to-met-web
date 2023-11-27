@@ -26,10 +26,10 @@ class GroupController extends Controller
             if (User::Auth::user()->id) {
 
                 $group = new ChatGroup();
-                $group->name = $request->group - name;
+                $group->name = $request->group_name;
                 $group->icon = "121";
                 $group->type = "121";
-                $group->desc = $request->group - desc;
+                $group->desc = $request->group_desc;
                 $group->group_admin = Auth::user()->id;
                 $group->participants = "121";
                 $group->status = 1;
@@ -44,7 +44,7 @@ class GroupController extends Controller
 
     public function viewGroupDashboard(Request $request)
     {
-        $group = ChatGroup::where('group_admin',Auth::user()->id);
+        $group = ChatGroup::where('group_admin',Auth::user()->id)->get();
         return view('group-chat',compact('group'));
     }
 

@@ -24,8 +24,8 @@ class DashboardController extends Controller
     }
 
     public function sendContactRequest(Request $request){
+        
         if(!ContactList::where("user_id_1", Auth::user()->id)->where('user_id_2',$request->friendID)->exists()){
-               
             $addFriend=new ContactList();
             $addFriend->user_id_1=Auth::user()->id;
             $addFriend->user_id_2=$request->friendID;
@@ -42,7 +42,7 @@ class DashboardController extends Controller
 
             return response()->json(['status'=>true,'message'=> 'Contact request added successfully.']);
         }else{
-            return response()->json(['status'=>false,'message'=> 'You have aleadry sent request to this contact']);
+            return response()->json(['status'=>false,'message'=> 'You have already sent request to this contact']);
         }
 
     }

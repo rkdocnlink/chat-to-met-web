@@ -28,7 +28,6 @@ class UserAuthController extends Controller
         return view('dashboard',compact('list_contacts','list_my_contacts'));
     }
 
-
     public function userLogin(Request $request){
         $request->validate([
             'email' => 'required|email',
@@ -41,7 +40,6 @@ class UserAuthController extends Controller
                     return redirect('dashboard')->with('success','You have Successfully loggedin');
                 }
             }else{
-
                    return redirect('login')->with('error','Sorry invalid password');
             }
         }else{
