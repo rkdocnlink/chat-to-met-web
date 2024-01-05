@@ -36,7 +36,7 @@ class AuthContoller extends Controller
                return response()->json(['status'=>false,'message'=>['error'=>['Sorry invalid password']]], 200);
            }
        }else{
-           return response()->json(['status'=>false,'message'=>['error'=>['Sorry this email does not exists']]], 200);
+           return response()->json(['status'=>false,'message'=>['error'=>['Sorry this email does not exist']]], 200);
        }
 
       }catch(Exception $e){ 
