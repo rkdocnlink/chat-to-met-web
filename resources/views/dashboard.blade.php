@@ -6,7 +6,7 @@
     <!-- Chats sidebar -->
     <div id="chats" class="left-sidebar-wrap sidebar active slimscroll">
 
-        <div class="slimscroll">
+        <div class="slimscroll" id="slimscroll" style="overflow:auto !important;">
             <div class="left-chat-title d-flex justify-content-between align-items-center">
                 <div class="chat-title">
                     <h4>CHATS</h4>
@@ -240,7 +240,7 @@
     
                                 if(data.status==true){
                                     $(".chat-body").html(data.data)
-                                }
+                                               }
                             },
                             error: function (data) {
                                 console.log('Error:', data);
@@ -253,6 +253,9 @@
                     setInterval(()=>{
                         var user_id=$(".getUserID").val();
                         loadChatUser(user_id)
+                        document.getElementById('slimscroll').scrollTop =  document.getElementById('slimscroll').scrollHeight 
+
+                     
                     },1000)
                 
                 })
